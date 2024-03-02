@@ -28,6 +28,11 @@ class Graph:
                     queue.sort()
 
 
+def get_node_heuristics(node, goal):
+    heuristic_value = int(input(f"Enter h value for {node} to {goal}:"))
+    return heuristic_value
+
+
 def main():
     graph = Graph()
     edges = int(input("Edges: "))
@@ -39,11 +44,7 @@ def main():
     start_node = input("Enter start node: ")
     goal_node = input("Enter goal node: ")
 
-    def heuristic(node, goal):
-        # Example heuristic function (Euclidean distance between nodes)
-        return abs(int(node) - int(goal))
-
-    path, cost = graph.a_star(start_node, goal_node, heuristic)
+    path, cost = graph.a_star(start_node, goal_node, get_node_heuristics)
 
     if path:
         print("Best path:", ' -> '.join(path))
