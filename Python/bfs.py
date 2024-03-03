@@ -2,20 +2,20 @@ class Graph:
     def __init__(self):
         self.adj_list = {}
 
-    def add_edge(self, src, dest):
+    def add_edge(self, src, dest, weight):
         if src not in self.adj_list:
             self.adj_list[src] = []
         if dest not in self.adj_list:
             self.adj_list[dest] = []
 
-        self.adj_list[src].append(dest)
-        self.adj_list[dest].append(src)
+        self.adj_list[src].append((dest, weight))
+        # self.adj_list[dest].append(src)  #for undirected
 
     def print_graph(self):
         for src, dest_list in self.adj_list.items():
             print(f"Vertex {src}:", end='')
-            for dest in dest_list:
-                print(f"({src}->{dest})", end='')
+            for dest, weight in dest_list:
+                print(f"({src}->({dest},{weight})", end='')
             print()
 
     def BFS(self, start):
@@ -25,20 +25,20 @@ class Graph:
         while queue:
             vertex = queue.pop(0)
             if vertex not in visited:
-                print(vertex, end='')
+                print(vertex, end=' ')
                 visited[vertex] = True
-                for neighbour in self.adj_list[vertex]:
+                for neighbour,weight in self.adj_list[vertex]:
                     if neighbour not in visited:
                         queue.append(neighbour)
 
 
 def main():
     graph = Graph()
-    edges = (input("Edges: "))
+    edges = int(input("Edges: "))
 
     for _ in range(edges):
-        src, dest = input("Enter src dest").split()
-        graph.add_edge(src, dest)
+        src, dest, weight = input("Enter src dest and weight").split()
+        graph.add_edge(src, dest, int(weight))
 
     graph.print_graph()
 
