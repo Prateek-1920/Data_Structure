@@ -27,9 +27,11 @@ int binomial_coeff(int n, int r)
 
 int main()
 {
-    int n, c;
+    int n, r;
     printf("Enter values of n and r: ");
-    scanf("%d%d", &n, &c);
-    printf("Values of binomial coeff is: %d\n", binomial_coeff(n, c));
+    scanf("%d%d", &n, &r);
+
+    printf("Value of C(%d,%d) is: %d\n", n, r, binomial_coeff(n, r));
+
     return 0;
 }
